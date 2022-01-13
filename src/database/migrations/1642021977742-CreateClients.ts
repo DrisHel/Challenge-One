@@ -31,18 +31,14 @@ export class CreateClients1642021977742 implements MigrationInterface {
                     },
                     {
                         name:"city_id",
-                        type:"varchar"
+                        type:"uuid"
                     },
-                    {
-                        name: "created_at",
-                        type:"timestemp",
-                        default:"now()"
-                    },
+                  
                 ],
                 foreignKeys:[
                     {
-                        name:"fk_clients_cities",
-                        columnNames: [ "cities_id" ],
+                        name:"fk_clients_city",
+                        columnNames: [ "city_id" ],
                         referencedTableName: "cities",
                         referencedColumnNames: ["id"]
                     }

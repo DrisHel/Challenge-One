@@ -1,4 +1,3 @@
-import internal from "stream";
 import { Entity, Column, CreateDateColumn, PrimaryColumn, ManyToOne, JoinColumn  } from "typeorm";
 import{ v4 as uuid } from "uuid";
 import { City } from "./City";
@@ -29,7 +28,13 @@ export class Client{
     @JoinColumn({ name: "city_id"})
     city: City;
 
-    @CreateDateColumn()
-    createde_at: Date;
+    constructor() {
 
+        if (!this.id) {
+    
+          this.id = uuid();
+    
+        }
+    
+      }
 }

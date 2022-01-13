@@ -11,7 +11,7 @@ export class CreateCities1642021927535 implements MigrationInterface {
                       name:"id",
                       type:"uuid",  
                       isPrimary:true,
-                      isGenerated:true
+
                     },
                 
                     {
@@ -22,12 +22,8 @@ export class CreateCities1642021927535 implements MigrationInterface {
                     {
                         name:"state",
                         type:"varchar"
-                    },
-                    {
-                        name: "created_at",
-                        type:"timestemp",
-                        default:"now()"
                     }
+
                 ]
             })
         )

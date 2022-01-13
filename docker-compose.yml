@@ -1,6 +1,4 @@
-version: '3'
-
-
+version: "3.5"
 
 services:
 
@@ -12,7 +10,9 @@ services:
 
       POSTGRES_USERNAME: "postgres"
 
-      POSTGRES_PASSWORD: "123456"
+      POSTGRES_PASSWORD: "postgres"
+
+      POSTGRES_DB: "clients_n_cities"
 
     ports:
 
@@ -20,4 +20,40 @@ services:
 
     volumes:
 
-      - C:/Users/doris.nunes/Documents/postgres:/var/lib/postgresql/data
+      - /home/duducp/PostgreSQL:/var/lib/postgresql/data
+
+    networks:
+
+      - postgres-compose-network
+
+
+
+  pgadmin-compose:
+
+    image: dpage/pgadmin4
+
+    environment:
+
+      PGADMIN_DEFAULT_EMAIL: "postgres@email.com"
+
+      PGADMIN_DEFAULT_PASSWORD: "postgres"
+
+    ports:
+
+      - "15432:80"
+
+    depends_on:
+
+      - postgres-compose
+
+    networks:
+
+      - postgres-compose-network
+
+
+
+networks:
+
+  postgres-compose-network:
+
+    driver: bridge

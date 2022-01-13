@@ -1,5 +1,11 @@
-import{Router} from "express";
+import "reflect-metadata";
+import express from "express";
+import "./database/index";
+import { routes } from "../src/app/routes/index";
 
-const routes = Router();
+const app = express();
 
-export {routes};
+app.use(express.json());
+app.use(routes);
+
+export {app};
