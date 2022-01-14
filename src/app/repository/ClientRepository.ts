@@ -11,10 +11,10 @@ import { Client } from "../entities/Client";
         return clients;
     }
 
-    async find(payload):Promise <Client[] | Error>{
+    async find(payload):Promise< [Client [], number]>{
         const repo = getRepository(Client);
 
-        const clients = await repo.find(payload);
+        const clients = await repo.findAndCount(payload);
 
         return clients;
     }

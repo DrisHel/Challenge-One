@@ -17,11 +17,12 @@ class CityService {
         
         const [docs, totalDocs] = await cityRepository.find(filter);
         const object = {docs, totalDocs, limit, totalPages: totalDocs/limit +1, page}
+       
         return this.CityServicepaginatedSerialiser(object);
     }
      CityServicepaginatedSerialiser=({docs,totalDocs,limit,totalPages,page}) =>{
         return{ 
-            Docs:docs,
+            city:docs,
             limit,
             total:totalDocs,
             offset:page,

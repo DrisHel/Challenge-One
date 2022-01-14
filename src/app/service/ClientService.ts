@@ -1,4 +1,5 @@
 
+
 import { Client } from "../entities/Client";
 import { ClientRepository } from "../repository/ClientRepository";
 
@@ -8,11 +9,27 @@ class ClientService {
         const result = await clientRepository.create(payload);
         return result;
     }
-    async findAll(payload){
-        const client = await clientRepository.find(payload);
-
-        return client;
+    async findAll({limit=5,page=1,...payload}){
+        const filter = { 
+            take:limit,
+            skip:(Number(page)-1)*Number(limit),
+            where:payload
+        }
+        const [docs, totalDocs] = await clientRepository.find(filter);
+        const object = {docs, totalDocs, limit, totalPages: totalDocs/limit +1, page}
+        return this.ClientServicepaginatedSerialiser(object);
     }
+
+    ClientServicepaginatedSerialiser=({docs,totalDocs,limit,totalPages,page}) =>{
+        return{ 
+            client:docs,
+            limit,
+            total:totalDocs,
+            offset:page,
+            offsets:totalPages,
+        }
+    
+        } 
 
     async delete(payload){
         const client = await clientRepository.delete(payload);
