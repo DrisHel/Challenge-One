@@ -17,7 +17,7 @@ class ClientController  {
         const result = await clientService.findAll(request.query);
       return response.status(200).json(result);
         } catch(error) {
-        return response.status(400).json(error);
+        return response.status(400).json(error.message);
         }  
     }
 
@@ -30,7 +30,7 @@ class ClientController  {
       }
   }
 
-  async update(request: Request, response:Response) {
+  async update(request: Request, response:Response) { //está fazendo a alteração, porém não mostra o que foi alterado, retornar para ajuste.
     try {
       const {id} = request.params;
       const payload = request.body;
@@ -41,7 +41,7 @@ class ClientController  {
     }
 }
 
-async findById(request: Request, response:Response) {
+async findById(request: Request, response:Response) { 
   try {
     const result = await clientService.findOne(request.params);
   return response.status(204).json(result);

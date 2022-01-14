@@ -11,10 +11,10 @@ import { City } from "../entities/City";
         return cities;
     }
 
-    async find(payload):Promise <City[] | Error>{
+    async find(payload):Promise< [City [], number]>{
         const repo = getRepository(City);
 
-        const cities = await repo.find(payload);
+        const cities = await repo.findAndCount(payload);
 
         return cities;
     }

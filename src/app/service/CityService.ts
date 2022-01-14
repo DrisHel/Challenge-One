@@ -8,11 +8,28 @@ class CityService {
         const result = await cityRepository.create(payload);
         return result;
     }
-    async findAll(payload){
-        const cities = await cityRepository.find(payload);
-
-        return cities;
+    async findAll({limit=5,page=1,...payload}){  // desestruturação das querys
+        const filter = { 
+            take:limit,
+            skip:(Number(page)-1)*Number(limit),
+            where:payload
+        }
+        
+        const [docs, totalDocs] = await cityRepository.find(filter);
+        const object = {docs, totalDocs, limit, totalPages: totalDocs/limit +1, page}
+        return this.CityServicepaginatedSerialiser(object);
     }
+     CityServicepaginatedSerialiser=({docs,totalDocs,limit,totalPages,page}) =>{
+        return{ 
+            Docs:docs,
+            limit,
+            total:totalDocs,
+            offset:page,
+            offsets:totalPages,
+        }
+    
+        } 
+    
 
     async delete(payload){
         const cities = await cityRepository.delete(payload);
@@ -34,3 +51,4 @@ class CityService {
 }    
 
 export {CityService};
+
