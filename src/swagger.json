@@ -1,0 +1,339 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+      "title": "Challenge-One",
+      "description": "In our day-to-day we work with the development of microservices developed using Node. We seek automation of quality assurance, testing, deployment and release processes. This project presents a simple customer record that will be edited according to the customer's request.",
+      "contact": {
+        "email": "doris.nunes@compasso.uol.com.br"
+      },
+      "version": "1.0.0"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:3000/",
+        "description": "Base URL"
+      }
+    ],
+    "paths": {
+      "/client": {
+        "post": {
+          "summary": "Insert client into the database",
+          "description": "This route uses req.body to get information about the client and insert into the database.",
+          "tags": [
+            "Client"
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Client"
+                },
+                "examples": {
+                  "person": {
+                    "value": {
+                      "name": "Mariana Pimentel",
+                      "gender": "F",
+                      "age":40,
+                      "birthdate": "01/10/1980",
+                      "cityId": "bdbb00cf-0715-45fd-9091-f383a90eba42"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Client was successful created",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "$ref": "#/components/schemas/Client"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "req.body had invalid items to insert"
+            }
+          }
+        }
+      },
+      "/client/name/{name}": {
+        "get": {
+          "summary": "Find client by its name",
+          "description": "This route uses req.params.name and returns a client with its informations from the database based on its param.",
+          "tags": [
+            "Client"
+          ],
+          "responses": {
+            "200": {
+              "description": "Client's data was successful found and returned"
+            },
+            "400": {
+              "description": "Invalid name format"
+            },
+            "404": {
+              "description": "Client not found"
+            }
+          },
+          "parameters": [
+            {
+              "in": "path",
+              "name": "name",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ]
+        }
+      },
+      "/client/{id}": {
+        "get": {
+          "summary": "Find client by its ID",
+          "description": "This route uses req.params.id and returns a client with its informations from the database based on its param.",
+          "tags": [
+            "Client"
+          ],
+          "responses": {
+            "200": {
+              "description": "Client's data was successful found and returned"
+            },
+            "400": {
+              "description": "Invalid ID format"
+            },
+            "404": {
+              "description": "Client not found"
+            }
+          },
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ]
+        },
+        "delete": {
+          "summary": "Delete client by its ID",
+          "description": "This route uses req.params.id and deletes a client from the database based on its param.",
+          "tags": [
+            "Client"
+          ],
+          "responses": {
+            "204": {
+              "description": "Client was successful deleted"
+            },
+            "400": {
+              "description": "Invalid ID format"
+            },
+            "404": {
+              "description": "Client not found"
+            }
+          },
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ]
+        },
+        "put": {
+          "summary": "Update client's name by its ID",
+          "description": "This route uses req.params.id to find a client in the database based on its param and req.body to updates the client's name.",
+          "tags": [
+            "Client"
+          ],
+          "responses": {
+            "200": {
+              "description": "Person updated with success"
+            },
+            "400": {
+              "description": "Wrong id or content format"
+            },
+            "404": {
+              "description": "Person not found"
+            }
+          },
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schema/Client"
+                },
+                "examples": {
+                  "person": {
+                    "value": {
+                      "name": "Angelo Mosaico"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/city": {
+        "post": {
+          "summary": "Insert city into the database",
+          "description": "This route uses req.body to get information about the city and insert into the database.",
+          "tags": [
+            "City"
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schema/City"
+                },
+                "examples": {
+                  "city": {
+                    "value": {
+                      "city": "Pelotas",
+                      "state": "RS"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "City was successful created",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/City"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "req.body had invalid items to insert"
+            }
+          }
+        }
+      },
+      "/city/name/{city}": {
+        "get": {
+          "summary": "Find city by its name",
+          "description": "This route uses req.params.name and returns a city with its informations from the database based on its param.",
+          "tags": [
+            "City"
+          ],
+          "responses": {
+            "200": {
+              "description": "City's data was successful found and returned"
+            },
+            "400": {
+              "description": "Invalid name format"
+            },
+            "404": {
+              "description": "City not found"
+            }
+          },
+          "parameters": [
+            {
+              "in": "path",
+              "name": "name",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ]
+        }
+      },
+      "/city/statecity/{state}": {
+        "get": {
+          "summary": "Find list of cities by its state",
+          "description": "This route uses req.params.state and returns a list of cities with its informations from the database based on its param.",
+          "tags": [
+            "City"
+          ],
+          "responses": {
+            "200": {
+              "description": "State and its cities' data was successful found and returned"
+            },
+            "400": {
+              "description": "Invalid state format"
+            },
+            "404": {
+              "description": "State and its cities not found"
+            }
+          },
+          "parameters": [
+            {
+              "in": "path",
+              "name": "state",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "$ref": "#/components/schemas/Cities"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "Client": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "gender": {
+              "type": "string"
+            },
+            "birthdate": {
+              "type": "string"
+            },
+            "age": {
+              "type": "number"
+            },
+            "cityId": {
+              "type": "string"
+            }
+          }
+        },
+        "City": {
+          "type": "object",
+          "properties": {
+            "city": {
+              "type": "string"
+            },
+            "state": {
+              "type": "string"
+            }
+          }
+        },
+        "Cities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/City"
+          }
+        }
+      }
+    }
+  }
