@@ -44,7 +44,7 @@ class CityController {
   async findById(request: Request, response: Response) {
     try {
       const result = await cityService.findOne(request.params);
-      return response.status(204).json(result);
+      return response.status(200).json(result);
     } catch (error) {
       return response.status(400).json(error);
     }
