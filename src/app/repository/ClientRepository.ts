@@ -35,5 +35,11 @@ class ClientRepository {
     const result = await repo.findOne(id);
     return result;
   }
+
+  async findName(name): Promise<Client | Error> {
+    const repo = getRepository(Client);
+    return repo.findOne(name);
+  }
 }
+
 export { ClientRepository };

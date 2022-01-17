@@ -28,14 +28,14 @@ export class CreateClients1642021977742 implements MigrationInterface {
             type: 'int'
           },
           {
-            name: 'city_id',
+            name: 'cityId',
             type: 'uuid'
           }
         ],
         foreignKeys: [
           {
             name: 'fk_clients_city',
-            columnNames: ['city_id'],
+            columnNames: ['cityId'],
             referencedTableName: 'cities',
             referencedColumnNames: ['id']
           }

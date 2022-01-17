@@ -35,5 +35,18 @@ class CityRepository {
     const result = await repo.findOne(id);
     return result;
   }
+
+  async findCity(city): Promise<City | Error> {
+    const repo = getRepository(City);
+    const result = await repo.findOne(city);
+    return result;
+  }
+
+  async findState(state): Promise<City | Error> {
+    const repo = getRepository(City);
+    const result = await repo.findOne(state);
+    return result;
+  }
 }
+
 export { CityRepository };

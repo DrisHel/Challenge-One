@@ -7,7 +7,7 @@ export = async (req, res, next) => {
       gender: Joi.string().valid('F', 'M', 'Other').required(),
       birthdate: Joi.date().required(),
       age: Joi.number().required(),
-      city_id: Joi.string().uuid().required()
+      cityId: Joi.string().uuid().required()
     });
 
     const { error } = await Client.validate(req.body, { abortEarly: false });

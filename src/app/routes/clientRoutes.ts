@@ -9,5 +9,6 @@ clientroutes.get('/client', new ClientController().findAll);
 clientroutes.delete('/client/:id', getByIdValidation, new ClientController().delete);
 clientroutes.put('/client/:id', getByIdValidation, new ClientController().update);
 clientroutes.get('/client/:id', getByIdValidation, new ClientController().findById);
+clientroutes.get('/client/name/:name', new ClientController().getName);
 
 export { clientroutes };

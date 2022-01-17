@@ -9,5 +9,7 @@ citiesroutes.get('/city', new CityController().findAll);
 citiesroutes.delete('/city/:id', getByIdValidation, new CityController().delete);
 citiesroutes.put('/city/:id', getByIdValidation, new CityController().update);
 citiesroutes.get('/city/:id', getByIdValidation, new CityController().findById);
+citiesroutes.get('/city/name/:city', new CityController().getCity);
+citiesroutes.get('/city/name/statecity/:state', new CityController().getState);
 
 export { citiesroutes };

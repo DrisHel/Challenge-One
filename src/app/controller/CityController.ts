@@ -49,6 +49,24 @@ class CityController {
       return response.status(400).json(error);
     }
   }
+
+  async getCity(request: Request, response: Response) {
+    try {
+      const result = await cityService.findCity(request.params);
+      return response.status(200).json(result);
+    } catch (error) {
+      return response.status(400).json(error);
+    }
+  }
+
+  async getState(request: Request, response: Response) {
+    try {
+      const result = await cityService.findState(request.params);
+      return response.status(200).json(result);
+    } catch (error) {
+      return response.status(400).json(error);
+    }
+  }
 }
 
 export { CityController };
