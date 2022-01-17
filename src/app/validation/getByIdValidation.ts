@@ -3,7 +3,7 @@ import Joi from 'joi';
 export = async (req, res, next) => {
   try {
     const entities = Joi.object({
-      id: Joi.string().uuid(),
+      id: Joi.string().uuid()
     });
 
     const { error } = await entities.validate(req.params, { abortEarly: false });
