@@ -1,5 +1,6 @@
 # Challenge-One ✅ 
 
+[![N|Solid](https://cldup.com/dTxpPi9lDf.thumb.png)](https://nodesource.com/products/nsolid)
 
 <p align="center">🚧 Status: In production. 🚧 </p>
 <p align="justified">
@@ -19,5 +20,24 @@
 - [uuid](https://www.npmjs.com/package/uuid)
 - [MetadataReflectionAPI](https://www.npmjs.com/package/reflect-metadata)
 
+### 🎲 Installation
 
-### Autor(a) 💡 https://github.com/DrisHel
+Install the dependencies and devDependencies and start the server.
+
+```sh
+git clone https://github.com/DrisHel/Challenge-One.git
+cd Challenge-One
+yarn add install
+yarn run start 
+yarn dev
+
+```
+
+
+### Author: 💡 https://github.com/DrisHel
+
+## License
+
+MIT
+
+**Free Software, Hell Yeah!**
