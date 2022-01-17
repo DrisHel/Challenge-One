@@ -4,7 +4,7 @@ export = async (req, res, next) => {
   try {
     const Client = Joi.object({
       name: Joi.string().min(10).max(40).required(),
-      gender:Joi.string().valid('F','M').required(),
+      gender:Joi.string().valid('F','M','Other').required(),
       birthdate:Joi.date().required(),
       age:Joi.number().required(),
       city_id:Joi.string().uuid().required()
