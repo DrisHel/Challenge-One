@@ -1,9 +1,9 @@
-import { getRepository } from 'typeorm';
+import { getConnection } from 'typeorm';
 import { Client } from '../entities/Client';
 
 class ClientRepository {
   async create(payload) {
-    const repo = getRepository(Client);
+    const repo = getConnection(process.env.NODE_ENV).getRepository(Client);
     const { name, gender, cityId, birthdate, age } = payload;
     const clients = repo.create({ name, gender, cityId, birthdate, age });
     await repo.save(clients);
@@ -11,7 +11,7 @@ class ClientRepository {
   }
 
   async find(payload): Promise<[Client[], number]> {
-    const repo = getRepository(Client);
+    const repo = getConnection(process.env.NODE_ENV).getRepository(Client);
 
     const clients = await repo.findAndCount(payload);
 
@@ -19,25 +19,25 @@ class ClientRepository {
   }
 
   async delete(id) {
-    const repo = getRepository(Client);
+    const repo = getConnection(process.env.NODE_ENV).getRepository(Client);
     const result = await repo.delete(id);
     return result;
   }
 
   async update(id, payload) {
-    const repo = getRepository(Client);
+    const repo = getConnection(process.env.NODE_ENV).getRepository(Client);
     const result = await repo.update(id, payload);
     return result;
   }
 
   async findOne(id): Promise<Client | Error> {
-    const repo = getRepository(Client);
+    const repo = getConnection(process.env.NODE_ENV).getRepository(Client);
     const result = await repo.findOne(id);
     return result;
   }
 
   async findName(name): Promise<Client | Error> {
-    const repo = getRepository(Client);
+    const repo = getConnection(process.env.NODE_ENV).getRepository(Client);
     return repo.findOne(name);
   }
 }
