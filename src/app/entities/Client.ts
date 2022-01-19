@@ -17,9 +17,6 @@ export class Client {
   birthdate: Date;
 
   @Column()
-  age: number;
-
-  @Column()
   cityId: string;
 
   @ManyToOne(() => City)
