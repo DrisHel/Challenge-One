@@ -6,7 +6,7 @@ export = async (req, res, next) => {
       name: Joi.string().min(10).max(40).required(),
       gender: Joi.string().trim().valid('F', 'M', 'Other').required(),
       birthdate: Joi.date().required(),
-      age: Joi.number().required(),
+      age: Joi.number(),
       cityId: Joi.string().uuid().required()
     });
 
