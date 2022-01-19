@@ -4,8 +4,8 @@ import { Client } from '../entities/Client';
 class ClientRepository {
   async create(payload) {
     const repo = getConnection(process.env.NODE_ENV).getRepository(Client);
-    const { name, gender, cityId, birthdate, age } = payload;
-    const clients = repo.create({ name, gender, cityId, birthdate, age });
+    const { name, gender, cityId, birthdate } = payload;
+    const clients = repo.create({ name, gender, cityId, birthdate });
     await repo.save(clients);
     return clients;
   }
