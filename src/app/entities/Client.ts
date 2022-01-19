@@ -7,19 +7,19 @@ export class Client {
   @PrimaryColumn()
   id: string;
 
-  @Column() // nome completo
+  @Column()
   name: string;
 
-  @Column() // sexo
+  @Column()
   gender: string;
 
-  @Column() // data de nascimento
+  @Column()
   birthdate: Date;
 
-  @Column() // idade
+  @Column()
   age: number;
 
-  @Column() // cidade
+  @Column()
   cityId: string;
 
   @ManyToOne(() => City)
