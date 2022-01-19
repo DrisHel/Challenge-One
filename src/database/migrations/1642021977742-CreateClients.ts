@@ -25,10 +25,6 @@ export class CreateClients1642021977742 implements MigrationInterface {
             type: 'date'
           },
           {
-            name: 'age',
-            type: 'int'
-          },
-          {
             name: 'cityId',
             type: 'uuid'
           }
