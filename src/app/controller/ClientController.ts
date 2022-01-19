@@ -50,15 +50,6 @@ class ClientController {
       return response.status(400).json(error);
     }
   }
-
-  async getName(request: Request, response: Response) {
-    try {
-      const result = await clientService.findN(request.params);
-      return response.status(200).json(result);
-    } catch (error) {
-      return response.status(400).json(error);
-    }
-  }
 }
 
 export { ClientController };
