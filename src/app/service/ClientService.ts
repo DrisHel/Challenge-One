@@ -12,7 +12,8 @@ class ClientService {
     const filter = {
       take: limit,
       skip: (Number(page) - 1) * Number(limit),
-      where: payload
+      where: payload,
+      relations: ['city']
     };
     const [docs, totalDocs] = await clientRepository.find(filter);
     const object = { docs, totalDocs, limit, totalPages: totalDocs / limit + 1, page };
@@ -29,7 +30,6 @@ class ClientService {
 
   async delete(payload) {
     const client = await clientRepository.delete(payload);
-
     return client;
   }
 
