@@ -44,12 +44,6 @@ class ClientService {
 
     return client;
   }
-
-  async findN(name): Promise<Client | Error> {
-    const client = await clientRepository.findName(name);
-
-    return client;
-  }
 }
 
 export { ClientService };

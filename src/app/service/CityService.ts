@@ -47,17 +47,5 @@ class CityService {
 
     return cities;
   }
-
-  async findCity(city): Promise<City | Error> {
-    const cities = await cityRepository.findCity(city);
-
-    return cities;
-  }
-
-  async findState(state): Promise<City | Error> {
-    const states = await cityRepository.findState(state);
-
-    return states;
-  }
 }
 export { CityService };
