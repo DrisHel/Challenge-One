@@ -1,4 +1,5 @@
 import { City } from '../entities/City';
+import { NotFound } from '../errors/notfounds';
 import { CityRepository } from '../repository/CityRepository';
 
 const cityRepository = new CityRepository();
@@ -9,7 +10,6 @@ class CityService {
   }
 
   async findAll({ limit = 5, page = 1, ...payload }) {
-    // desestruturação das querys
     const filter = {
       take: limit,
       skip: (Number(page) - 1) * Number(limit),
@@ -31,9 +31,9 @@ class CityService {
   });
 
   async delete(payload) {
-    const cities = await cityRepository.delete(payload);
-
-    return cities;
+    const getCity = await this.findOne(payload);
+    if (!getCity) throw new NotFound(payload);
+    return cityRepository.delete(payload);
   }
 
   async update(id, payload) {
