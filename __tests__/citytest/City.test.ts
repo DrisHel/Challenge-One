@@ -29,13 +29,13 @@ describe('create client', () => {
   });
 
   it('Bad request ', async () => {
-    const cityMock = {
+    const city = {
       city: ' ',
 
       state: 'rs '
     };
 
-    const res = await request(app).post('/city').send(cityMock);
+    const res = await request(app).post('/city').send(city);
 
     expect(res.statusCode).toEqual(400);
   });
