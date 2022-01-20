@@ -1,4 +1,5 @@
 import { Client } from '../entities/Client';
+import { NotFound } from '../errors/notfounds';
 import { ClientRepository } from '../repository/ClientRepository';
 
 const clientRepository = new ClientRepository();
@@ -16,21 +17,13 @@ class ClientService {
       relations: ['city']
     };
     const [docs, totalDocs] = await clientRepository.find(filter);
-    const object = { docs, totalDocs, limit, totalPages: totalDocs / limit + 1, page };
-    return this.ClientServicepaginatedSerialiser(object);
+    return { docs, totalDocs, limit, totalPages: totalDocs / limit + 1, page };
   }
 
-  ClientServicepaginatedSerialiser = ({ docs, totalDocs, limit, totalPages, page }) => ({
-    client: docs,
-    limit,
-    total: totalDocs,
-    offset: page,
-    offsets: totalPages
-  });
-
   async delete(payload) {
-    const client = await clientRepository.delete(payload);
-    return client;
+    const getClient = await this.findOne(payload);
+    if (!getClient) throw new NotFound(payload);
+    return clientRepository.delete(payload);
   }
 
   async update(id, payload) {
