@@ -9,7 +9,7 @@ class ClientController {
       const result = await clientService.create(request.body);
       return response.status(201).json(result);
     } catch (error) {
-      return response.status(400).json(error);
+      return response.status(400).json({ msg: error.message });
     }
   }
 
@@ -27,7 +27,7 @@ class ClientController {
       const result = await clientService.delete(request.params);
       return response.status(204).json(result);
     } catch (error) {
-      return response.status(400).json(error);
+      return response.status(400).json(response);
     }
   }
 
