@@ -1,10 +1,19 @@
 import { Client } from '../entities/Client';
-import { NotFound } from '../errors/notfounds';
+import { AlreadyExists } from '../errors/AlreadyExists';
+import { NotFound } from '../errors/NotFounds';
 import { ClientRepository } from '../repository/ClientRepository';
 
 const clientRepository = new ClientRepository();
+const clientrepo = new ClientRepository();
 class ClientService {
   async create(payload): Promise<Client | Error> {
+    const { name } = payload;
+    const cities = await clientrepo.findOne({
+      where: {
+        name
+      }
+    });
+    if (cities) throw new AlreadyExists();
     const result = await clientRepository.create(payload);
     return result;
   }
