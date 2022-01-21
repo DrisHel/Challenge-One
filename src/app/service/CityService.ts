@@ -1,15 +1,27 @@
 import { City } from '../entities/City';
-import { NotFound } from '../errors/notfounds';
+import { AlreadyExists } from '../errors/AlreadyExists';
+import { NotFound } from '../errors/NotFounds';
+
 import { CityRepository } from '../repository/CityRepository';
 
 const cityRepository = new CityRepository();
+const cityrepo = new CityRepository();
 class CityService {
   async create(payload): Promise<City | Error> {
+    const { city, state } = payload;
+    const cities = await cityrepo.findOne({
+      where: {
+        city,
+        state
+      }
+    });
+    if (cities) throw new AlreadyExists();
+
     const result = await cityRepository.create(payload);
     return result;
   }
 
-  async findAll({ limit = 5, page = 1, ...payload }) {
+  async findAll({ limit = 100, page = 1, ...payload }) {
     const filter = {
       take: limit,
       skip: (Number(page) - 1) * Number(limit),
