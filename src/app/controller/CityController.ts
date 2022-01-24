@@ -26,7 +26,7 @@ class CityController {
       const result = await cityService.delete(request.params);
       return response.status(204).json(result);
     } catch (error) {
-      return response.status(400).json(error);
+      return response.status(400).json({});
     }
   }
 
@@ -35,7 +35,7 @@ class CityController {
       const { id } = request.params;
       const payload = request.body;
       const result = await cityService.update(id, payload);
-      return response.status(204).json(result);
+      return response.status(200).json(result);
     } catch (error) {
       return response.status(400).json(error);
     }
