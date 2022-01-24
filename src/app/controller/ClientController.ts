@@ -24,20 +24,19 @@ class ClientController {
 
   async delete(request: Request, response: Response) {
     try {
-      const result = await clientService.delete(request.params);
-      return response.status(204).json(result);
+      await clientService.delete(request.params);
+      return response.status(204).json({});
     } catch (error) {
-      return response.status(400).json(response);
+      return response.status(400).json('Bad request');
     }
   }
 
   async update(request: Request, response: Response) {
-    // está fazendo a alteração, porém não mostra o que foi alterado, retornar para ajuste.
     try {
       const { id } = request.params;
       const payload = request.body;
-      const result = await clientService.update(id, payload);
-      return response.status(204).json(result);
+      await clientService.update(id, payload);
+      return response.status(200).json(payload);
     } catch (error) {
       return response.status(400).json(error);
     }
