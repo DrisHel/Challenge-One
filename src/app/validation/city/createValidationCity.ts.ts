@@ -1,40 +1,14 @@
 import Joi from 'joi';
+import { enumState } from '../../utils/enumState';
 
 export = async (req, res, next) => {
   try {
     const entitie = Joi.object({
       city: Joi.string().min(4).max(30).required(),
       state: Joi.string()
+        .uppercase()
+        .valid(...enumState)
         .required()
-        .valid(
-          'AC',
-          'AL',
-          'AP',
-          'AM',
-          'BA',
-          'CE',
-          'DF',
-          'ES',
-          'GO',
-          'MA',
-          'MT',
-          'MS',
-          'MG',
-          'PA',
-          'PB',
-          'PR',
-          'PE',
-          'PI',
-          'RJ',
-          'RN',
-          'RS',
-          'RO',
-          'RR',
-          'SC',
-          'SP',
-          'SE',
-          'TO'
-        )
     });
 
     const { error } = await entitie.validate(req.body, { abortEarly: false });
