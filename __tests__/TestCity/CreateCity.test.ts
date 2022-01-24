@@ -16,18 +16,6 @@ describe('create client', () => {
     expect(response.body).toHaveProperty('id');
   });
 
-  it('returns bad request ', async () => {
-    const cityMock = {
-      city: 'Pelotas',
-
-      state: 'rs'
-    };
-
-    const res = await request(app).post('/city').send(cityMock);
-
-    expect(res.statusCode).toEqual(400);
-  });
-
   it('Bad request ', async () => {
     const city = {
       city: ' ',
@@ -55,18 +43,6 @@ describe('create client', () => {
       city: 102030,
 
       state: 10
-    };
-
-    const res = await request(app).post('/city').send(cityMock);
-
-    expect(res.statusCode).toEqual(400);
-  });
-
-  it('Bad request ', async () => {
-    const cityMock = {
-      city: 'Gramado',
-
-      state: 'Rs'
     };
 
     const res = await request(app).post('/city').send(cityMock);
