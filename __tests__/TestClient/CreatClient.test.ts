@@ -4,7 +4,7 @@ import { app } from '../../src/app';
 describe('create client', () => {
   it('returns status 201', async () => {
     const cityMock = {
-      city: 'Gramado',
+      city: 'Passo Fundo',
 
       state: 'RS'
     };
@@ -39,15 +39,30 @@ describe('create client', () => {
   });
 
   it('returns bad request ', async () => {
-    const city = {
-      name: 'Joaozinho do teste ',
+    const client = {
+      name: 'Joaozinho do teste',
       gender: 'F',
       birthdate: '2000/12/07',
       cityId: ' ',
       age: 41
     };
 
-    const res = await request(app).post('/city').send(city);
+    const res = await request(app).post('/city').send(client);
+
+    expect(res.statusCode).toEqual(400);
+  });
+  it('returns bad request ', async () => {
+    const client01 = {
+      name: 'Joaozinho do teste',
+      gender: 'F',
+      birthdate: '2000/12/07',
+      cityId: 'Passo Fundo',
+      age: 41
+    };
+
+    const client02 = client01;
+    await request(app).post('/city').send(client01);
+    const res = await request(app).post('/city').send(client02);
 
     expect(res.statusCode).toEqual(400);
   });
