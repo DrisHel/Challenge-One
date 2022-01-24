@@ -5,7 +5,10 @@ export = async (req, res, next) => {
   try {
     const Client = Joi.object({
       name: Joi.string().min(10).max(40).required(),
-      gender: Joi.string().trim().valid(enumCity).required(),
+      gender: Joi.string()
+        .trim()
+        .valid(...enumCity)
+        .required(),
       birthdate: Joi.date().required(),
       age: Joi.number(),
       cityId: Joi.string().uuid().required()
