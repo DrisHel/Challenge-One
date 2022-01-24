@@ -23,10 +23,10 @@ class CityController {
 
   async delete(request: Request, response: Response) {
     try {
-      const result = await cityService.delete(request.params);
-      return response.status(204).json(result);
+      await cityService.delete(request.params);
+      return response.status(204).json({});
     } catch (error) {
-      return response.status(400).json({});
+      return response.status(400).json('Bad request');
     }
   }
 
