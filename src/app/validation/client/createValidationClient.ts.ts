@@ -9,8 +9,7 @@ export = async (req, res, next) => {
         .trim()
         .valid(...enumCity)
         .required(),
-      birthdate: Joi.date().required(),
-      age: Joi.number(),
+      birthdate: Joi.date().less(Date.now()).required(),
       cityId: Joi.string().uuid().required()
     });
 
