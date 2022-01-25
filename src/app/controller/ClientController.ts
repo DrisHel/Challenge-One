@@ -27,7 +27,7 @@ class ClientController {
       await clientService.delete(request.params);
       return response.status(204).json({});
     } catch (error) {
-      return response.status(400).json('Bad request');
+      return response.status(400).json(error);
     }
   }
 
@@ -38,7 +38,7 @@ class ClientController {
       await clientService.update(id, payload);
       return response.status(200).json(payload);
     } catch (error) {
-      return response.status(400).json(error);
+      return response.status(400).json({ message: 'incorrect id' });
     }
   }
 

@@ -17,7 +17,7 @@ class CityController {
       const result = await cityService.findAll(request.query);
       return response.status(200).json(result);
     } catch (error) {
-      return response.status(404).json(error);
+      return response.status(400).json(error);
     }
   }
 
@@ -26,7 +26,7 @@ class CityController {
       await cityService.delete(request.params);
       return response.status(204).json({});
     } catch (error) {
-      return response.status(400).json('Bad request');
+      return response.status(400).json(error);
     }
   }
 
