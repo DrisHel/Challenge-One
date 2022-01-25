@@ -12,4 +12,16 @@ describe('Find the city', () => {
     const response = await request(app).get('/city').send(cityMock);
     expect(response.statusCode).toEqual(200);
   });
+  it('Bad request ', async () => {
+    const city = {
+      city: 'Pelotas',
+
+      state: 'RS'
+    };
+
+    await request(app).post('/city').send(city);
+    const res = await request(app).get('/city/');
+    const { status } = res;
+    expect(status).toEqual(400);
+  });
 });
