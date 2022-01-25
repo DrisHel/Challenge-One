@@ -29,8 +29,7 @@ describe('create client', () => {
       name: ' ',
       gender: 'F',
       birthdate: '14/12/1980',
-      cityId: '049ae653-1e80-451d-92d8-50a476632139',
-      age: 41
+      cityId: '049ae653-1e80-451d-92d8-50a476632139'
     };
 
     const res = await request(app).post('/city').send(city);
@@ -43,8 +42,7 @@ describe('create client', () => {
       name: 'Joaozinho do teste',
       gender: 'F',
       birthdate: '2000/12/07',
-      cityId: ' ',
-      age: 41
+      cityId: ' '
     };
 
     const res = await request(app).post('/city').send(client);
@@ -53,16 +51,12 @@ describe('create client', () => {
   });
   it('returns bad request ', async () => {
     const client01 = {
-      name: 'Joaozinho do teste',
-      gender: 'F',
+      name: 'Joaozinho do teste tesljnhaflijdsninvgiuhweruihopiudvhnpozçsjiofhndouipghoaihpiowhuihd',
+      gender: 'Feminino',
       birthdate: '2000/12/07',
-      cityId: 'Passo Fundo',
-      age: 41
+      cityId: 'Passo Fundo'
     };
-
-    const client02 = client01;
-    await request(app).post('/city').send(client01);
-    const res = await request(app).post('/city').send(client02);
+    const res = await request(app).post('/client').send(client01);
 
     expect(res.statusCode).toEqual(400);
   });
