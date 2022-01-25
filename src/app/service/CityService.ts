@@ -49,7 +49,15 @@ class CityService {
   }
 
   async update(id, payload) {
-    const cities = await cityRepository.update(id, payload);
+    const { city, state } = payload;
+    const cities = await cityrepo.findOne({
+      where: {
+        city,
+        state
+      }
+    });
+    if (cities) throw new AlreadyExists();
+    await cityRepository.update(id, payload);
 
     return cities;
   }
