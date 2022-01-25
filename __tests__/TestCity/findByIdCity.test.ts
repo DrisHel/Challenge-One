@@ -14,4 +14,17 @@ describe('Find By Id city', () => {
 
     expect(response1.statusCode).toEqual(200);
   });
+  it('Bad request ', async () => {
+    const iderrado = 12345;
+    const city = {
+      city: 'Pelotas',
+
+      state: 'RS'
+    };
+
+    await request(app).post('/city').send(city);
+    const res = await request(app).get(`/city/${iderrado}`);
+    const { status } = res;
+    expect(status).toEqual(400);
+  });
 });
