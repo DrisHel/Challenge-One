@@ -49,4 +49,21 @@ describe('create client', () => {
 
     expect(res.statusCode).toEqual(400);
   });
+  it('returns bad request ', async () => {
+    const cityMock = {
+      city: 'Porto Alegre',
+
+      state: 'RS'
+    };
+
+    await request(app).post('/city/').send(cityMock);
+
+    const resp = await request(app).post('/city/').send(cityMock);
+
+    expect(resp.body).toEqual({
+      description: 'Bad request',
+
+      message: `Already existing information.`
+    });
+  });
 });
